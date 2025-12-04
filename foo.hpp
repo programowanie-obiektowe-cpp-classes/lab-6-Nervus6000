@@ -10,7 +10,19 @@ std::vector< char > foo(std::list< Human >& people)
 {
     std::vector< char > retval(people.size());
 
-    // Twoja implementacja tutaj
+    std::for_each(people.begin(), people.end(), [](Human& h) { h.birthday(); });
 
-    return retval;
+    auto out_it = retval.rbegin();
+
+    std::for_each(people.begin(), people.end(), [&](Human& h) {
+        if (h.isMonster()) {
+            *out_it = 'n';
+        }
+        else {
+            *out_it = 'y';
+        }
+
+        ++out_it;
+    });
+return retval;
 }
